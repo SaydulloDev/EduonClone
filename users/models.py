@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -26,9 +28,14 @@ class CustomUserModel(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(max_length=256, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
+
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = ['password']
+
     object = CustomUserManager()
+
+    class Meta:
+        verbose_name_plural = 'User'
 
     def clean(self):
         if not self.phone.startswith('998'):
@@ -51,6 +58,9 @@ class CustomUserModel(AbstractBaseUser, PermissionsMixin):
 class MyCourses(models.Model):
     course = models.ForeignKey('eduon.Course', related_name='enrolled_course', on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name_plural = 'My Course'
+
     def clean(self):
         course = self.course
         if MyCourses.objects.filter(course=course).exists():
@@ -58,3 +68,21 @@ class MyCourses(models.Model):
 
     def __str__(self):
         return self.course.title
+
+
+class VerificationCodeSMS(models.Model):
+    code = models.CharField(max_length=6)
+    user = models.ForeignKey(
+        CustomUserModel, on_delete=models.CASCADE, related_name="verification_codes_sms", null=True, blank=True
+    )
+    phone = models.CharField(max_length=15, unique=True, null=True)
+    last_sent_time = models.DateTimeField(auto_now=True)
+    is_verified = models.BooleanField(default=False)
+    expired_at = models.DateTimeField(null=True)
+
+    @property
+    def is_expire(self):
+        return self.expired_at < self.last_sent_time + timedelta(seconds=90)
+
+    class Meta:
+        verbose_name_plural = 'SMS Verification'
