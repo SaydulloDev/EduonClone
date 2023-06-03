@@ -16,6 +16,9 @@ class Course(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = 'Course'
+
     def save(
             self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
@@ -33,6 +36,9 @@ class CourseMaterials(models.Model):
     title = models.CharField(max_length=128)
     video = models.FileField(upload_to='course_material/video/')
     file = models.FileField(upload_to='course_material/pdf/')
+
+    class Meta:
+        verbose_name_plural = 'Course Material'
 
     def __str__(self):
         return self.title

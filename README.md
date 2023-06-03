@@ -1,2 +1,2 @@
 # EduonClone
-Eduon Clone | Official Site edion.uz
+Eduon Clone | Official Site [EduOn.Uz](https://eduon.uz/)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CustomUserModel, MyCourses
+from .models import CustomUserModel, MyCourses, VerificationCodeSMS
 
 
 # Register your models here.
@@ -12,3 +12,8 @@ class CustomUserAdmin(admin.ModelAdmin):
 @admin.register(MyCourses)
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ['course']
+
+
+@admin.register(VerificationCodeSMS)
+class VerificationCodeSMS(admin.ModelAdmin):
+    list_display = ['phone', 'code', 'is_verified']

@@ -158,3 +158,18 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/EduonClone.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/media/course_material/pdf/logo_tw.eps
+/media/course_material/video/logo_tw.eps
+/media/tutorial_video/devops.pdf
+/media/tutorial_video/devops_c7DhNpZ.pdf
+/eduon/migrations/0001_initial.py
+/eduon/migrations/0002_initial.py
+/users/migrations/0001_initial.py
+/eduon_db
