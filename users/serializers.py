@@ -112,10 +112,3 @@ class SendVerificationCodeSMS(serializers.Serializer):
 class CheckVerificationCodeSMS(serializers.Serializer):
     phone = serializers.CharField(max_length=15)
     code = serializers.CharField(max_length=6)
-
-    def validate(self, attrs):
-        code = attrs.get('code')
-        if not code:
-            raise ValidationError('Enter the sent code.')
-        if len(code) != 6:
-            raise ValidationError('Invalid code.')
